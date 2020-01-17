@@ -3,6 +3,7 @@ package dept;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,10 +35,20 @@ public class DeptServlet extends HttpServlet {
 		//2. 비지니스메소드 call
 		DeptDAOImpl dao = new DeptDAOImpl();
 		int result = dao.insert(dept);
-		
+		/*
 		pw.print("<h1>삽입성공</h1>");
 		pw.print("<hr/>");
-		pw.print("<h3>"+result+"개 행 삽입성공</h3>");
+		pw.print("<h3>"+result+"개 행 삽입성공</h3>");*/
+		
+		//3. 응답화면으로 요청재지정
+		//response.sendRedirect("/serverweb/dept/insertResult.html");
+		
+		//3. 데이터 공유
+		request.setAttribute("insertresult", result);
+		
+		//4. 응답화면으로 요청재지정
+		RequestDispatcher rd = request.getRequestDispatcher("/dept/insertResult.jsp");
+		rd.forward(request, response);
 	}
 
 }

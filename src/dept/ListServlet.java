@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +24,7 @@ public class ListServlet extends HttpServlet {
 		list = dao.getDeptList();
 		//ArrayList<DeptDTO> list = dao.getDeptList(); 위두줄 한줄로
 		//3. 응답메시지 생성
-		pw.print("<h1>부서목록보기</h1>");
+		/*pw.print("<h1>부서목록보기</h1>");
 		pw.print("<hr/>");
 		pw.print("<table border='1' width='500'>");
 		pw.print("<tr>");
@@ -42,6 +43,11 @@ public class ListServlet extends HttpServlet {
 								+"&info=test'>삭제</a></td>");
 			pw.print("</tr>");
 		}
-		pw.print("</table>");
+		pw.print("</table>");*/
+		//3. 데이터공유
+		request.setAttribute("list", list);
+		//4. 요청재지정
+		RequestDispatcher rd = request.getRequestDispatcher("/dept/list.jsp");
+		rd.forward(request, response);
 	}
 }
