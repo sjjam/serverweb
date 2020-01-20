@@ -7,4 +7,5 @@ public interface DeptDAO {
 	//전체 목록 출력
 	ArrayList<DeptDTO> getDeptList();
 	int delete(String deptNo);
+	DeptDTO read(String deptNo);
 }
